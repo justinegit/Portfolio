@@ -3,40 +3,122 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Basic Website</title>
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #282c34;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        #game-container {
+            background: #3a3f47;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px #61dafb;
+            text-align: center;
+            width: 300px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #21a1f1;
+        }
+
+        #message {
+            margin-top: 15px;
+            min-height: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
+    <div id="game-container">
+        <h1>Guess the Number</h1>
+        <p>I'm thinking of a number between 1 and 100.</p>
+        <input type="number" id="guessInput" placeholder="Your guess" min="1" max="100" />
+        <br />
+        <button id="guessBtn">Guess</button>
+        <p id="message"></p>
+        <button id="restartBtn" style="display:none; margin-top: 10px;">Play Again</button>
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <script>
+        const guessInput = document.getElementById('guessInput');
+        const guessBtn = document.getElementById('guessBtn');
+        const message = document.getElementById('message');
+        const restartBtn = document.getElementById('restartBtn');
 
-    <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>This is the homepage of my simple website.</p>
-        </section>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
 
-        <section id="about">
-            <h2>About</h2>
-            <p>Here you can put some information about yourself or your site.</p>
-        </section>
+        function resetGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            message.textContent = '';
+            guessInput.value = '';
+            guessInput.disabled = false;
+            guessBtn.style.display = 'inline-block';
+            restartBtn.style.display = 'none';
+        }
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>You can reach me at: <a href="mailto:example@example.com">example@example.com</a></p>
-        </section>
-    </main>
+        guessBtn.addEventListener('click', () => {
+            const guess = Number(guessInput.value);
+            if (!guess || guess < 1 || guess > 100) {
+                message.textContent = 'Please enter a valid number between 1 and 100.';
+                return;
+            }
 
-    <footer>
-        <p>© 2025 My Basic Website</p>
-    </footer>
+            attempts++;
+
+            if (guess === secretNumber) {
+                message.textContent = `🎉 Correct! You guessed the number in ${attempts} attempts.`;
+                guessInput.disabled = true;
+                guessBtn.style.display = 'none';
+                restartBtn.style.display = 'inline-block';
+            } else if (guess < secretNumber) {
+                message.textContent = 'Too low! Try a higher number.';
+            } else {
+                message.textContent = 'Too high! Try a lower number.';
+            }
+
+            guessInput.value = '';
+            guessInput.focus();
+        });
+
+        restartBtn.addEventListener('click', resetGame);
+
+        // Initialize game
+        resetGame();
+    </script>
 </body>
 </html>
