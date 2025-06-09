@@ -1,124 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Guess the Number Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #282c34;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        #game-container {
-            background: #3a3f47;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px #61dafb;
-            text-align: center;
-            width: 300px;
-        }
-
-        input[type="number"] {
-            width: 100px;
-            padding: 8px;
-            margin: 10px 0;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #61dafb;
-            color: #282c34;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #21a1f1;
-        }
-
-        #message {
-            margin-top: 15px;
-            min-height: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>>Stories Of Justine</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: #fff;
+    }
+    header {
+      background: #000;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+    nav {
+      text-align: center;
+      padding: 1rem;
+    }
+    nav a {
+      color: #ccc;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 10px;
+      padding: 1rem;
+    }
+    .portfolio img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .about, .contact {
+      padding: 2rem;
+      text-align: center;
+      background: #1a1a1a;
+    }
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-    <div id="game-container">
-        <h1>Guess the Number</h1>
-        <p>I'm thinking of a number between 1 and 100.</p>
-        <input type="number" id="guessInput" placeholder="Your guess" min="1" max="100" />
-        <br />
-        <button id="guessBtn">Guess</button>
-        <p id="message"></p>
-        <button id="restartBtn" style="display:none; margin-top: 10px;">Play Again</button>
-    </div>
 
-    <script>
-        const guessInput = document.getElementById('guessInput');
-        const guessBtn = document.getElementById('guessBtn');
-        const message = document.getElementById('message');
-        const restartBtn = document.getElementById('restartBtn');
+<header>
+  <h1>Stories Of Justine</h1>
+  <p>Capturing Moments. Telling Stories.</p>
+</header>
 
-        let secretNumber = Math.floor(Math.random() * 100) + 1;
-        let attempts = 0;
+<nav>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-        function resetGame() {
-            secretNumber = Math.floor(Math.random() * 100) + 1;
-            attempts = 0;
-            message.textContent = '';
-            guessInput.value = '';
-            guessInput.disabled = false;
-            guessBtn.style.display = 'inline-block';
-            restartBtn.style.display = 'none';
-        }
+<section id="portfolio" class="portfolio">
+  <img src="https://source.unsplash.com/800x600/?nature" alt="Nature">
+  <img src="https://source.unsplash.com/800x600/?wedding" alt="Wedding">
+  <img src="https://source.unsplash.com/800x600/?portrait" alt="Portrait">
+  <img src="https://source.unsplash.com/800x600/?street" alt="Street">
+</section>
 
-        guessBtn.addEventListener('click', () => {
-            const guess = Number(guessInput.value);
-            if (!guess || guess < 1 || guess > 100) {
-                message.textContent = 'Please enter a valid number between 1 and 100.';
-                return;
-            }
+<section id="about" class="about">
+  <h2>About Me</h2>
+  <p>I’m Justine, a freelance photographer based in India. I specialize in candid photography, portraits, and capturing the real essence of life and people.</p>
+</section>
 
-            attempts++;
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:justinpaulson426@gmail.com" style="color: #0cf;">justinpaulson426@gmail.com</a></p>
+  <p>Instagram: <a href="https://www.instagram.com/storiesofjustine/" target="_blank" style="color: #0cf;">@storiesofjustine</a></p>
+</section>
 
-            if (guess === secretNumber) {
-                message.textContent = `🎉 Correct! You guessed the number in ${attempts} attempts.`;
-                guessInput.disabled = true;
-                guessBtn.style.display = 'none';
-                restartBtn.style.display = 'inline-block';
-            } else if (guess < secretNumber) {
-                message.textContent = 'Too low! Try a higher number.';
-            } else {
-                message.textContent = 'Too high! Try a lower number.';
-            }
+<footer>
+  © 2025 Stories Of Justine
+</footer>
 
-            guessInput.value = '';
-            guessInput.focus();
-        });
-
-        restartBtn.addEventListener('click', resetGame);
-
-        // Initialize game
-        resetGame();
-    </script>
 </body>
 </html>
