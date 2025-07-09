@@ -45,5 +45,38 @@
       });
   </script>
 
+  <script>
+    // Fetch photo data from the public API
+    fetch('https://jsonplaceholder.typicode.com/photos')
+      .then(response => response.json()) // convert the response to JSON
+      .then(photos => {
+        const container = document.getElementById('photo-list');
+
+        photos.forEach(photo => {
+          // Create a styled card for each user
+          const photoCard = `
+            <div style="
+              background: #fff;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+              padding: 20px;
+              margin: 20px 0;
+            ">
+              <h2 style="margin: 0 0 10px;">${photo.albumId}</h2>
+              <p><strong>id:</strong> ${photo.id}</p>
+              <p><strong>title:</strong> ${photo.title}</p>
+              <p><strong>url:</strong> <a href="http://${photo.url}" target="_blank">${photo.url}</a></p>
+              <p><strong>thumbnailUrl:</strong> ${photo.thumbnailUrl}</p>
+            </div>
+          `;
+          container.innerHTML += photoCard;
+        });
+      })
+      .catch(error => {
+        document.getElementById('photo-list').innerHTML = '<p style="color:red;">Failed to load photo data.</p>';
+        console.error('Error fetching data:', error);
+      });
+  </script>
+
 </body>
 </html>
